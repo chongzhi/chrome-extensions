@@ -1,0 +1,31 @@
+body{
+    color: black!important;
+}
+
+.windows #files .file .data pre, .windows #files .file .line-data, .windows #files .file .line-number, .linux #files .file .data pre, .linux #files .file .line-data, .linux #files .file .line-number, .windows .file-box .data pre, .windows .file-box .line-data, .windows .file-box .line-number, .linux .file-box .data pre, .linux .file-box .line-data, .linux .file-box .line-number, .windows #files .file .data td.line_numbers, .linux #files .file .data td.line_numbers, .windows .file-box .data td.line_numbers, .linux .file-box .data td.line_numbers {
+
+    font-family: 'Consolas', 'Droid Sans Mono', 'Verdana', 'Bitstream Vera Sans Mono', 'Courier New', monospace!important;
+    font-size: 12px!important;
+    
+}
+
+.highlight .k,
+.highlight .kd,
+.highlight .kc,
+.highlight .nb{
+    color: #b200b4!important;
+    font-weight: normal!important;
+}
+.highlight .o{
+    font-weight: normal!important;
+}
+
+.highlight .mi {
+    color:blue!important;
+}
+
+.highlight .c1,
+.highlight .cm {
+    font-style:normal!important;
+    color:green!important;
+}

@@ -1,0 +1,102 @@
+body, ul, li, p {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+body{
+    font-size:14px;
+    line-height:1.5;
+    width:480px;
+    font-family: "MicroSoft YaHei";
+    padding:10px;
+   
+}
+
+input{
+    font-family: "MicroSoft YaHei";
+    vertical-align:middle;
+}
+
+h1{
+    line-height:1.2;
+    text-align:center;
+    font-size:22px;
+}
+
+h2{
+    color:blue;
+}
+
+.msg{
+    color:red;
+    margin-top:5px;
+    font-size:12px;
+}
+
+.wrap{
+    border:1px solid #BBBBBB;
+    margin-top:20px;
+    padding:10px 20px;
+    border-radius:5px;
+    box-shadow:3px 3px 3px rgba(0, 0, 0, 0.1);
+    background-color:#f5f5f5;
+}
+
+.wrap-ex{
+    border-color:#ffa461;
+    background-color:#feffd5;
+    
+}
+
+.list{
+    padding-top:20px;
+}
+.list li{
+    
+    padding-bottom:10px; 
+    margin-bottom:15px;
+}
+
+.ipt{
+    border:1px solid #999;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.2) inset;
+    padding:3px;
+}
+.ipt2{
+    border-color:#FFA461;
+    width: 410px;
+    color:red;
+}
+
+.sel{
+    padding:3px;
+    vertical-align:middle;
+}
+.button{
+	min-width: 80px;
+    font-size:14px;
+    font-weight:bold;
+	color: #567;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	padding: 6px;
+	border: solid 1px #abc;
+	border-radius: 2px;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f0f5fc), color-stop(1, #e0e9f4));
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.4, hsl(0, 0%, 96%)), color-stop(0.41, hsl(0, 0%, 92%)));
+	-webkit-box-shadow: 0px 1px 2px #ddd;
+    -webkit-transition: all 0.5s ease-in;
+}
+
+.button:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f6fafe), color-stop(1, #e3ebf7));
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff),  color-stop(0.4, hsl(215, 67%, 96%)), color-stop(0.41, hsl(213, 48%, 92%)));
+}
+
+.button:active {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e0e9f4), color-stop(1, #f5f9f4));
+}
+
+.red{ color:red;}

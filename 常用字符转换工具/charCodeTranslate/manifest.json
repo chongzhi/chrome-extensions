@@ -1,0 +1,13 @@
+{
+    "name": "常用字符转换工具",
+    "version": "1.0",
+    "description": "常用字符转换工具，应用于js,css中等。",
+    "icons": {
+        "128": "icon.png"
+    },
+    "browser_action": {
+        "default_title": "常用字符转换工具",
+        "default_icon": "icon.png",
+        "default_popup": "popup.html" 
+    }
+}

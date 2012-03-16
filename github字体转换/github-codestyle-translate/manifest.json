@@ -1,0 +1,25 @@
+{
+    "name": "github字体转换",
+    
+    "version": "1.0",
+    
+    "description": "github字体转换",
+
+    "icons": {
+        "128": "icon.png"
+    },
+    
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "css": ["css/style.css"],
+            "js": ["js/jquery.js", "js/content.js"],
+            "all_frames": true
+        }
+    ],
+    
+    "permissions": [
+        "http://*/*",
+        "geolocation"
+    ]
+}

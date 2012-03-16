@@ -1,0 +1,32 @@
+{
+    "name": "铁路网自动登录",
+    
+    "version": "1.0",
+    
+    "description": "The first extension that I made.",
+    
+    /*"browser_action": {
+        "default_icon": "icon.png",
+        "popup": "popup.html"
+    },*/
+    
+    /* "background_page": "background.html", */
+    
+    "icons": {
+        "128": "icon.png"
+    },
+    
+    "content_scripts": [
+        {
+            "matches": ["https://dynamic.12306.cn/otsweb/*"],
+            "css": ["css/css.css"],
+            "js": ["js/jquery.js", "js/test.js"],
+            "all_frames": true
+        }
+    ],
+    
+    "permissions": [
+        "http://*/*",
+        "geolocation"
+    ]
+}
