@@ -121,17 +121,6 @@ function DecimalHTML (v) {
     return result.join('');
 }
 
-/**
- * html转义字符恢复成字符串
- * @param {string} v 传入的字符串
- * @return {string} 处理的结果
- */
-function restoreHTML (v) {
-    var div = document.createElement('div');
-    div.innerHTML = v;
-
-    return div.innerHTML;
-}
 
 /**
  * html转义字符转成unicode，js中使用
@@ -140,19 +129,18 @@ function restoreHTML (v) {
  */
 function htmlToUnicode (v) {
     if (v === '') return;
-
     var arr = v.split(';');
     var result = [];
 
     arr.pop();
 
     for (var i = 0, len = arr.length; i < len; i++) {
-        var s = parseInt(arr[i].slice(2), 10).toString(16);
+        var s = parseInt(arr[i].slice(2), 10);
 
-        result.push('\\u' + s);
+        result.push(s);
     }
 
-    return result.join('');
+    return String.fromCharCode.apply(this, result);
 }
 
  
@@ -207,7 +195,7 @@ function converType(e) {
                 break;
 
             case '6':
-                result = restoreHTML(v);
+                result = htmlToUnicode(v);
                 renderResult(result);
                 break;
         }
