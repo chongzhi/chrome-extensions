@@ -106,7 +106,7 @@ function decodeStr (v) {
 }
 
 /**
- * DecimalHTML
+ * 字符串转成html转义字符，方便页面使用
  * @param {string} v 传入的字符串
  * @return {string} 处理的结果
  */
@@ -120,7 +120,42 @@ function DecimalHTML (v) {
 
     return result.join('');
 }
-    
+
+/**
+ * html转义字符恢复成字符串
+ * @param {string} v 传入的字符串
+ * @return {string} 处理的结果
+ */
+function restoreHTML (v) {
+    var div = document.createElement('div');
+    div.innerHTML = v;
+
+    return div.innerHTML;
+}
+
+/**
+ * html转义字符转成unicode，js中使用
+ * @param {string} v 传入的字符串
+ * @return {string} 处理的结果
+ */
+function htmlToUnicode (v) {
+    if (v === '') return;
+
+    var arr = v.split(';');
+    var result = [];
+
+    arr.pop();
+
+    for (var i = 0, len = arr.length; i < len; i++) {
+        var s = parseInt(arr[i].slice(2), 10).toString(16);
+
+        result.push('\\u' + s);
+    }
+
+    return result.join('');
+}
+
+ 
 
 
 /**
@@ -168,6 +203,11 @@ function converType(e) {
 
             case '5': 
                 result = DecimalHTML(v);
+                renderResult(result);
+                break;
+
+            case '6':
+                result = restoreHTML(v);
                 renderResult(result);
                 break;
         }
