@@ -14,9 +14,9 @@ chrome.tabs.getSelected(null, function(tab) {
 
     // 发一个当前tab的url请求
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function (xhrEvt) {
-        var x = xhr;
-    };
+    // xhr.onreadystatechange = function (xhrEvt) {
+    //     var x = xhr;
+    // };
     xhr.open('get', tab.url, false);
     xhr.send(null);
 });
