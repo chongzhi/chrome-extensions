@@ -1,5 +1,6 @@
 // 添加监听请求
 chrome.webRequest.onCompleted.addListener(function(details) {
+    chrome.webRequest.onCompleted.removeListener(arguments.callee);//清除监听
     console.log(details.ip); //请求的ip地址
     document.getElementById('ip').innerHTML = '当前网站IP：' + details.ip;
 }, {"urls": ['*://*/*']}, ['responseHeaders']);
