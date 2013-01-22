@@ -5,7 +5,7 @@ function G(id) {
 
 /**
  * excute
- */ 
+ */
 var input     = G('input'),
     convert   = G('convert'),
     CSSResult = G('resultCSSType'),
@@ -24,7 +24,7 @@ function unicodeToString(v) {
     //检测英文等字符排除
     /* function checkInput(str) {
         var charReg = /[^\u0391-\uFFE5]/g; //匹配英文等字符
-        
+
         if (charReg.test(str)) {
             msg.innerHTML = '输入字符格式有误，请输入中文等字符';
             input.select();
@@ -35,34 +35,34 @@ function unicodeToString(v) {
             msg.innerHTML = '';
             return true;
         }
-        
+
     } */
 
     function toUnicode(str, cssType) {
-        var i = 0, 
+        var i = 0,
             l = str.length,
             result = [], //转换后的结果数组
             unicodePrefix, //unicode前缀 (example:\1234||\u1234)
             unicode16; //转换成16进制后的unicode
-        
-        //如果是css中使用格式为\1234之类  
+
+        //如果是css中使用格式为\1234之类
         unicodePrefix = (cssType && cssType.toLowerCase() === 'css') ? '\\' : '\\u';
-            
+
         for (; i < l; i++) {
             //转为16进制的unicode, js及css里须转成16进制
-            unicode16 = str.charCodeAt(i).toString(16); 
+            unicode16 = str.charCodeAt(i).toString(16);
             result[i] = unicodePrefix + new Array(5 - unicode16.length).join('0') + unicode16;
         }
-        
+
         return result.join('');
     }
 
     resultArr.push(toUnicode(v));
     resultArr.push(toUnicode(v, 'css'));
-    
+
     return resultArr;
-    
-} 
+
+}
 
 /**
  * unicode转字符
@@ -71,24 +71,24 @@ function unicodeToString(v) {
  */
 function stringToUnicode(v) {
     var arrs, i, len, arr, result = '';
-    
-    
+
+
     if (/\\u/.test(v)) {
         arrs = v.split('\\u');
     } else {
         arrs = v.split('\\');
     }
-    
+
     arrs.shift();
-    
+
     for (i = 0, len = arrs.length; i < len; i++) {
         arrs[i] = parseInt(arrs[i], 16);
     }
-    
+
     result = String.fromCharCode.apply(null, arrs);
 
     return result;
-    
+
 }
 
 /**
@@ -98,11 +98,19 @@ function stringToUnicode(v) {
  * @return {string}
  */
 function encodeStr(v, flag) {
-    return encodeURIComponent(v);
+    try {
+        return encodeURIComponent(v);
+    } catch (err) {
+        return err;
+    }
 }
 
 function decodeStr (v) {
-    return decodeURIComponent(v);
+    try {
+        return decodeURIComponent(v);
+    } catch (err) {
+        return err;
+    }
 }
 
 /**
@@ -121,29 +129,41 @@ function DecimalHTML (v) {
     return result.join('');
 }
 
+/**
+ * html转义字符恢复成字符串
+ * @param {string} v 传入的字符串
+ * @return {string} 处理的结果
+ */
+function restoreHTML (v) {
+    var div = document.createElement('div');
+    div.innerHTML = v;
+
+    return div.innerHTML;
+}
 
 /**
  * html转义字符转成unicode，js中使用
  * @param {string} v 传入的字符串
  * @return {string} 处理的结果
  */
-function htmlToUnicode (v) {
-    if (v === '') return;
-    var arr = v.split(';');
-    var result = [];
+// function htmlToUnicode (v) {
+//     if (v === '') return;
 
-    arr.pop();
+//     var arr = v.split(';');
+//     var result = [];
 
-    for (var i = 0, len = arr.length; i < len; i++) {
-        var s = parseInt(arr[i].slice(2), 10);
+//     arr.pop();
 
-        result.push(s);
-    }
+//     for (var i = 0, len = arr.length; i < len; i++) {
+//         var s = parseInt(arr[i].slice(2), 10).toString(16);
 
-    return String.fromCharCode.apply(this, result);
-}
+//         result.push('\\u' + s);
+//     }
 
- 
+//     return result.join('');
+// }
+
+
 
 
 /**
@@ -155,54 +175,54 @@ function converType(e) {
     var val = sel.value,
         v = input.value,
         result = '';
-        
+
     if (v === '') return;
-    
+
     //管理事件
     if (e.type === 'click') {
         conType();
     } else if (e.type === 'keydown') {
-        if (e.keyCode === 13) { 
+        if (e.keyCode === 13) {
             conType();
         }
     }
 
     function conType() {
         switch (val) {
-            case '1': 
+            case '1':
                 result = unicodeToString(v);
                 renderResultCssType(result);
                 break;
-                
-            case '2': 
+
+            case '2':
                 result = stringToUnicode(v);
                 renderResult(result);
                 break;
-                
-            case '3': 
+
+            case '3':
                 result = encodeStr(v);
                 renderResult(result);
                 break;
-                
-            case '4': 
+
+            case '4':
                 result = decodeStr(v);
                 renderResult(result);
                 break;
 
-            case '5': 
+            case '5':
                 result = DecimalHTML(v);
                 renderResult(result);
                 break;
 
             case '6':
-                result = htmlToUnicode(v);
+                result = restoreHTML(v);
                 renderResult(result);
                 break;
         }
     }
-    
-    
-  
+
+
+
 }
 
 /**
@@ -212,7 +232,7 @@ function converType(e) {
  */
 function renderResult (v) {
     JSResult.value = v;
-    cssType.style.display = "none";  
+    cssType.style.display = "none";
 }
 
 function renderResultCssType (v) {
@@ -225,7 +245,7 @@ function focusToSelect() {
     this.select();
 }
 
-   
+
 //bind事件
 convert.addEventListener('click', converType, false);
 input.addEventListener('keydown', converType, false);

@@ -1,0 +1,26 @@
+{
+    //名称
+    "name": "显示当前网址实际IP",
+    "description": "显示当前网址实际IP",
+    "version": "1.0",
+    "manifest_version": 2,
+
+    //权限
+    "permissions": [
+        "notifications",
+        "webRequest",
+        "*://*/*",
+        "tabs"
+    ],
+
+    //弹出窗口选项
+    "browser_action": {
+        "default_title": "显示当前网址实际IP",
+        "default_icon": "icon.png", //显示在浏览器上的icon
+        "default_popup": "popup.html"
+    },
+
+    "icons": {
+        "128": "icon.png"
+    }
+}
