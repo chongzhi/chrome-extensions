@@ -2,7 +2,25 @@
 chrome.webRequest.onCompleted.addListener(function(details) {
     chrome.webRequest.onCompleted.removeListener(arguments.callee);//清除监听
     console.log(details.ip); //请求的ip地址
-    document.getElementById('ip').innerHTML = '当前网站实际IP：' + details.ip;
+    document.getElementById('ip').innerHTML = '当前网站IP： ' + details.ip;
+
+    //用新浪API查IP归属地
+    var _xhr = new XMLHttpRequest();
+    var url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=' + details.ip;
+    _xhr.onreadystatechange = function(xhrEvt) {
+        var x = _xhr;
+        if (_xhr.readyState === 4) {
+            if (_xhr.status === 200) {
+                var resp = JSON.parse(_xhr.responseText);
+                if (!resp.country) return; //有的IP查不出归属地
+                document.getElementById('area').innerHTML = '归属地： ' + resp.country + resp.province + resp.city + ' ' + resp.isp;
+            }
+        }
+    };
+    _xhr.open('get', url, true);
+    // _xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;');
+    _xhr.send(null);
+
 }, {"urls": ['*://*/*']}, ['responseHeaders']);
 
 //获取当前tab
@@ -13,11 +31,8 @@ chrome.tabs.getSelected(null, function(tab) {
         return;
     }
 
-    // 发一个当前tab的url请求
+    // 发一个当前tab的url请求，for ip address
     var xhr = new XMLHttpRequest();
-    // xhr.onreadystatechange = function (xhrEvt) {
-    //     var x = xhr;
-    // };
-    xhr.open('get', tab.url, false);
+    xhr.open('get', tab.url, true);
     xhr.send(null);
 });
