@@ -1,19 +1,22 @@
+var ip = document.getElementById('ip');
+var area = document.getElementById('area');
+
 // 添加监听请求
 chrome.webRequest.onCompleted.addListener(function(details) {
     chrome.webRequest.onCompleted.removeListener(arguments.callee);//清除监听
     console.log(details.ip); //请求的ip地址
-    document.getElementById('ip').innerHTML = '当前网站IP： ' + details.ip;
+    ip.innerHTML = '当前网站IP： ' + details.ip;
 
     //用新浪API查IP归属地
     var _xhr = new XMLHttpRequest();
     var url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=' + details.ip;
     _xhr.onreadystatechange = function(xhrEvt) {
-        var x = _xhr;
         if (_xhr.readyState === 4) {
-            if (_xhr.status === 200) {
+            var status = _xhr.status.toString(10);
+            if (/^2\d{2}$/.test(status) || status === '304') { //2xx及304都通过
                 var resp = JSON.parse(_xhr.responseText);
                 if (!resp.country) return; //有的IP查不出归属地
-                document.getElementById('area').innerHTML = '归属地： ' + resp.country + resp.province + resp.city + ' ' + resp.isp;
+                area.innerHTML = '归属地： ' + resp.country + resp.province + resp.city + ' ' + resp.isp;
             }
         }
     };

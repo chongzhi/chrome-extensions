@@ -3,9 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>IP</title>
+  <style type="text/css">
+
+.loading {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.loading .dot {
+  position: absolute;
+  opacity: 0;
+  width: 12px;
+  height: 12px;
+  -webkit-transform: rotate(225deg);
+  -webkit-animation-name: loading;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 5.28s;
+}
+.loading .dot:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 10px;
+  background: #000;
+}
+.loading .dot:nth-child(2) {
+  -webkit-animation-delay: .23s;
+}
+.loading .dot:nth-child(3) {
+  -webkit-animation-delay: .46s;
+}
+.loading .dot:nth-child(4) {
+  -webkit-animation-delay: .69s;
+}
+.loading .dot:nth-child(5) {
+  -webkit-animation-delay: .92s;
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(225deg);
+    opacity: 1;
+    -webkit-animation-timing-function: ease-out;
+  }
+  8% {
+    -webkit-transform: rotate(345deg);
+    -webkit-animation-timing-function: linear;
+  }
+  30% {
+    -webkit-transform: rotate(455deg);
+    -webkit-animation-timing-function: ease-in-out;
+  }
+  40% {
+    -webkit-transform: rotate(690deg);
+    -webkit-animation-timing-function: linear;
+  }
+  60% {
+    -webkit-transform: rotate(815deg);
+    opacity: 1;
+    -webkit-animation-timing-function: ease-out;
+  }
+  75% {
+    -webkit-transform: rotate(965deg);
+    -webkit-animation-timing-function: ease-out;
+  }
+  76% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+  </style>
 </head>
 <body style="white-space:nowrap; font-size:14px;">
-<div id="ip">IP地址侦测中...</div>
+<div id="ip">IP地址侦测中
+  <div class="loading">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
 <div id="area"></div>
 <script type="text/javascript" src="popup.js"></script>
 </body>
