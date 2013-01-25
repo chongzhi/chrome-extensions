@@ -5,7 +5,7 @@ var area = document.getElementById('area');
 chrome.webRequest.onCompleted.addListener(function(details) {
     chrome.webRequest.onCompleted.removeListener(arguments.callee);//清除监听
     console.log(details.ip); //请求的ip地址
-    ip.innerHTML = '当前网站IP： ' + details.ip;
+    ip.innerHTML = '当前网站IP： ' + details.ip + (details.ip === '127.0.0.1' ? '<br><span class="color-grey">(有可能使用了本地代理)</span>' : '');
 
     //用新浪API查IP归属地
     var _xhr = new XMLHttpRequest();
